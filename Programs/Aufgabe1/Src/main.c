@@ -31,9 +31,9 @@ int main(void) {
 	4. Auf Neustart warten  */ 
 	while(1) {
 		init(&stack);
-		status = listenRPN(&stack);
-		printError(&status);
-		listenRestart(&status);
+		status = listen_rpn(&stack);
+		print_error(&status);
+		listen_restart(&status);
 	}
 	return -1;
 }

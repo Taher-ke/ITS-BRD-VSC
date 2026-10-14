@@ -6,10 +6,10 @@
  * @brief
  */
 
-void printError(int *status);
+void print_error(int *status);
 
-void printInt(int input);
+void print_int(int input);
 
-void clearOutput();
+void clear_output();
 
 // EOF

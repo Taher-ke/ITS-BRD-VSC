@@ -15,18 +15,18 @@ void init(Stack *stack) {
 }
 
 // check if empty
-bool isEmpty(Stack *stack) {
+bool is_empty(Stack *stack) {
     return (stack->pos == 0);  
 }
 
 // check if full
-bool isFull(Stack *stack) {
+bool is_full(Stack *stack) {
     return (stack->pos >= STACK_SIZE - 1);  
 }
 
 // push on stack
 int push(Stack *stack, int value) {
-    if (isFull(stack)) {
+    if (is_full(stack)) {
         return -2;
     }
     stack->arr[stack->pos ++] = value;
@@ -35,7 +35,7 @@ int push(Stack *stack, int value) {
 
 // pop from stack
 int pop(Stack *stack, int *popped) {
-    if (isEmpty(stack)) {
+    if (is_empty(stack)) {
         return -3;
     }
 
@@ -45,7 +45,7 @@ int pop(Stack *stack, int *popped) {
 
 // show top element
 int peek(Stack *stack, int *peeked) {
-    if (isEmpty(stack)) {
+    if (is_empty(stack)) {
         return -3;
     }
     *peeked = stack->arr[stack->pos - 1];

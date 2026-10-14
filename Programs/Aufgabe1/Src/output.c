@@ -11,7 +11,7 @@
 #include "string.h"
 
 // Fehlermeldung auf dem Terminal ausgeben
-void printError(int *status) {
+void print_error(int *status) {
     clearStdout();
     switch(*status) {
         case -2:
@@ -33,30 +33,30 @@ void printError(int *status) {
 }
 
 // Integer in String umwandeln und auf dem Terminal ausgeben
-void printInt(int input)
+void print_int(int input)
 {
     // Maximale Länge des Integers:
     // (10 Ziffern, 1 minus, 1 \n,  1 Nullterminator) = 13
     char arr[13];
-    int isNegative = 0;
+    int is_negative = 0;
 
     // Negative Zahlen abfangen
-    unsigned int pInput;
+    unsigned int p_input;
     if(input < 0) {
-        isNegative = 1;
+        is_negative = 1;
         arr[0] = '-';
-        pInput = (unsigned int) -input;
+        p_input = (unsigned int) -input;
     }
     else {
-        pInput = (unsigned int) input;
+        p_input = (unsigned int) input;
     }
 
     // Anzahl Ziffern herausfinden
-    int digits = isNegative;
-    unsigned int pInput2 = pInput;
-    while(pInput2 >= 10)
+    int digits = is_negative;
+    unsigned int p_input2 = p_input;
+    while(p_input2 >= 10)
     {
-        pInput2 = pInput2 / 10;
+        p_input2 = p_input2 / 10;
         digits ++;
     }
 
@@ -65,15 +65,15 @@ void printInt(int input)
     arr[digits + 2] = '\0';
 
     // In Ziffern umwandeln
-    while(digits >= isNegative)
+    while(digits >= is_negative)
     {
-        arr[digits] = (char) (pInput % 10 + '0');
-        pInput = pInput / 10;
+        arr[digits] = (char) (p_input % 10 + '0');
+        p_input = p_input / 10;
         digits --;
     }
     printStdout(arr);
 }
 
-void clearOutput(void) {
+void clear_output(void) {
     clearStdout();
 }

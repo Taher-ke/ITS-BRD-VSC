@@ -13,14 +13,14 @@
  #include <token.h>
  #include <limits.h>
 
-int checkPlus(int a, int b) {
+int check_plus(int a, int b) {
     if ((b > 0 && a > INT_MAX - b) || (b < 0 && a < INT_MIN - b)) {
         return -5;
     }
     return 0;
 }
 
-int checkMinus(int a, int b) {
+int check_minus(int a, int b) {
     // b - a
     if ((a < 0 && b > INT_MAX + a) || (a > 0 && b < INT_MIN + a)) {
         return -5; 
@@ -28,7 +28,7 @@ int checkMinus(int a, int b) {
     return 0;
 }
 
-int checkMult(int a, int b) {
+int check_mult(int a, int b) {
     // Ergebnis null
     if (a == 0 || b == 0) {
         return 0;
@@ -67,7 +67,7 @@ int checkMult(int a, int b) {
     return 0;
 }
 
-int checkDiv(int a, int b) {
+int check_div(int a, int b) {
     // div mit 0
     if (a == 0) return -4;
     
@@ -79,20 +79,20 @@ int checkDiv(int a, int b) {
 
 
 // Aufteilung in vier Funktionen
-int checkOverflow(int *a, int *b, char type) {
+int check_overflow(int *a, int *b, char type) {
     int status;
     switch(type) {
         case '+':
-            status = checkPlus(*a, *b);
+            status = check_plus(*a, *b);
             break;
         case '-':
-            status = checkMinus(*a, *b);
+            status = check_minus(*a, *b);
             break;
         case '*':
-            status = checkMult(*a, *b);
+            status = check_mult(*a, *b);
             break;
         case '/':
-            status = checkDiv(*a, *b);
+            status = check_div(*a, *b);
             break;
         default: 
             status = -1;

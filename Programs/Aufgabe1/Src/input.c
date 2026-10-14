@@ -10,7 +10,7 @@
  #include <token.h>
 #include <scanner.h>
 
- int processToken(Stack *stack, T_token *token) {
+ int process_token(Stack *stack, T_token *token) {
 	int status = -1;
 	switch(token->tok) {
 		case NUMBER:
@@ -32,13 +32,13 @@
 			status = prt(stack);
 			break;
 		case PRT_ALL:
-			status = prtAll(stack);
+			status = prt_3(stack);
 			break;
 		case CLEAR:
 			status = clear(stack);
 			break;
 		case DOUBLE:
-			status = d(stack);
+			status = dup(stack);
 			//status = test(stack);
 			break;
 		case SWAP:
@@ -50,17 +50,17 @@
 	return status;
 }
 
-int listenRPN(Stack *stack) {
+int listen_rpn(Stack *stack) {
 	int status = 0;
 	// Main Loop
 	while(status >= 0) {
 		T_token token = nextToken();
-		status = processToken(stack,&token);
+		status = process_token(stack,&token);
 	}
 	return status;
 }
 
-void listenRestart(int *status) {
+void listen_restart(int *status) {
 	while(1) {
 		T_token token = nextToken();
 		if (token.tok == 'C') {

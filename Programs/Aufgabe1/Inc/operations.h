@@ -17,11 +17,11 @@ int div(Stack *stack);
 
 int prt(Stack *stack);
 
-int prtAll(Stack *stack);
+int prt_3(Stack *stack);
 
 int clear(Stack *stack);
 
-int d(Stack *stack);
+int dup(Stack *stack);
 
 int swap(Stack *stack);
 

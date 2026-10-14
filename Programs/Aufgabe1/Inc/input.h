@@ -8,8 +8,8 @@
 
 #include "stack.h"
 
-int listenRPN(Stack *stack);
+int listen_rpn(Stack *stack);
 
-void listenRestart(int *status);
+void listen_restart(int *status);
 
 // EOF

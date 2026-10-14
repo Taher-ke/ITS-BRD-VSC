@@ -20,7 +20,7 @@ int plus(Stack *stack) {
     if (
         (status = pop(stack, &popped1)) < 0 || 
         (status = pop(stack, &popped2)) < 0 ||
-        (status = checkOverflow(&popped1, &popped2, PLUS)) < 0 ||
+        (status = check_overflow(&popped1, &popped2, PLUS)) < 0 ||
         (status = push(stack, popped1 + popped2)) < 0
     ) {
         return status;
@@ -35,7 +35,7 @@ int minus(Stack *stack) {
     if (
         (status = pop(stack, &popped1)) < 0 || 
         (status = pop(stack, &popped2)) < 0 ||
-        (status = checkOverflow(&popped1, &popped2, MINUS)) < 0 ||
+        (status = check_overflow(&popped1, &popped2, MINUS)) < 0 ||
         (status = push(stack, popped2 - popped1)) < 0
     ) {
         return status;
@@ -50,7 +50,7 @@ int mult(Stack *stack) {
     if (
         (status = pop(stack, &popped1)) < 0 || 
         (status = pop(stack, &popped2)) < 0 ||
-        (status = checkOverflow(&popped1, &popped2, MULT)) < 0 ||
+        (status = check_overflow(&popped1, &popped2, MULT)) < 0 ||
         (status = push(stack, popped1 * popped2)) < 0
     ) {
         return status;
@@ -65,7 +65,7 @@ int div(Stack *stack) {
     if (
         (status = pop(stack, &popped1)) < 0 || 
         (status = pop(stack, &popped2)) < 0 ||
-        (status = checkOverflow(&popped1, &popped2, DIV)) < 0 ||
+        (status = (&popped1, &popped2, DIV)) < 0 ||
         (status = push(stack, popped2 / popped1)) < 0
     ) {
         return status;
@@ -80,26 +80,29 @@ int prt(Stack *stack) {
     if ((status = peek(stack, &peeked)) < 0) {
         return status;
     }
-    printInt(peeked);
+    print_int(peeked);
     return 0;
 }
-// alle Werte auf dem Stack ausgeben
-// Dazu wird ein zweiter Stack erzeugt und alle Werte beim Umstapeln ausgegeben
-int prtAll(Stack *stack) {
+
+// die drei obersten Werte auf dem Stack ausgeben
+// Dazu wird ein zweiter Stack erzeugt und die Werte werden beim Umstapeln ausgegeben
+int prt_3(Stack *stack) {
     int status;
     Stack stack2;
     init(&stack2);
+    int counter = 0;
     int val;
-    while(!isEmpty(stack)) {
+    while(!is_empty(stack) && counter < 3) {
         if(
             (status = pop(stack, &val)) < 0 ||
             (status = push(&stack2, val)) < 0
             ) {
             return status;
         }
-        printInt(val);
+        print_int(val);
+        counter = counter + 1;
     }
-    while(!isEmpty(&stack2)) {
+    while(!is_empty(&stack2)) {
         if(
             (status = pop(&stack2, &val)) < 0 ||
             (status = push(stack, val)) < 0
@@ -114,12 +117,12 @@ int prtAll(Stack *stack) {
 int clear(Stack *stack)
 {
     init(stack);
-    clearOutput();
+    clear_output();
     return 0;
 }
 
 // oberstes Element auf dem Stack duplizieren
-int d(Stack *stack) {
+int dup(Stack *stack) {
     int status;
     int peeked;
     if (
@@ -170,5 +173,32 @@ int test(Stack *stack)
     }
     return 0;
 }
+
+/* // alle Werte auf dem Stack ausgeben
+// Dazu wird ein zweiter Stack erzeugt und alle Werte beim Umstapeln ausgegeben
+int prtAll(Stack *stack) {
+    int status;
+    Stack stack2;
+    init(&stack2);
+    int val;
+    while(!is_empty(stack)) {
+        if(
+            (status = pop(stack, &val)) < 0 ||
+            (status = push(&stack2, val)) < 0
+            ) {
+            return status;
+        }
+        print_int(val);
+    }
+    while(!is_empty(&stack2)) {
+        if(
+            (status = pop(&stack2, &val)) < 0 ||
+            (status = push(stack, val)) < 0
+            ) {
+            return status;
+        }
+    }
+    return 0;
+} */
 
 // EOF
