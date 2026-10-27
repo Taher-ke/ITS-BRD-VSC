@@ -1,6 +1,6 @@
 /**
  * @file operations.c
- * @author Sönke Wulf 
+ * @author Sönke Wulf , Taher Keshavarzian
  * @date Mar 2016
  * 
  * @brief This module implements RPN operations.
@@ -65,7 +65,7 @@ int div(Stack *stack) {
     if (
         (status = pop(stack, &popped1)) < 0 || 
         (status = pop(stack, &popped2)) < 0 ||
-        (status = (&popped1, &popped2, DIV)) < 0 ||
+        (status = check_overflow(&popped1, &popped2, DIV)) < 0 ||
         (status = push(stack, popped2 / popped1)) < 0
     ) {
         return status;

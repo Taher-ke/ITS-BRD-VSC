@@ -1,6 +1,6 @@
 /**
  * @file output.c
- * @author Sönke Wulf
+ * @author Sönke Wulf , Taher Keshavarzian
  * @date Mar 2016
  * 
  * @brief

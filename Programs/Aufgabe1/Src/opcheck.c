@@ -1,6 +1,6 @@
 /**
  * @file opcheck.c
- * @author Sönke Wulf
+ * @author Sönke Wulf , Taher Keshavarzian
  * @date Mar 2016
  * 
  * @brief This module checks RPN operations for errors.

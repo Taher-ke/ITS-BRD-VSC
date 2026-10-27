@@ -10,6 +10,7 @@
 #include "display.h"
 #include "keypad.h"
 #include "token.h"
+#include <limits.h>
 
 /*
  ****************************************************************************************
@@ -41,13 +42,17 @@ T_token nextToken(void) {
 		case '5': case '6': case '7': case '8': case '9': 
          erg.tok = NUMBER; // scan a number
          while (('0' <= c) && (c <= '9')) {
-				printToEchoLine(c);
-				erg.val = erg.val * 10 + (c - '0');
-				if (erg.val < 0) { // Overflow 
-               erg.tok = OVERFLOW;
-               erg.val = 0;
-				   return erg;
-			   }				 
+            int digit = c - '0';
+            printToEchoLine(c);
+
+            if (erg.val > (INT_MAX - digit) / 10) {
+            erg.tok = OVERFLOW;
+            erg.val = 0;
+            c = ENTER;
+            return erg;
+            }
+
+            erg.val = erg.val * 10 + digit;
             c = nextChar();
          }
 			break;

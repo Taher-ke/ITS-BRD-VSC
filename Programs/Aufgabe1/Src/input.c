@@ -1,6 +1,6 @@
 /**
  * @file input.c
- * @author Sönke Wulf
+ * @author Sönke Wulf , Taher Keshavarzian
  * @date Mar 2016
  * 
  * @brief This module implements functions that listen for input.
@@ -43,6 +43,9 @@
 			break;
 		case SWAP:
 			status = swap(stack);
+			break;
+		case OVERFLOW:
+			status= -5;
 			break;
 		default:
 			status = -1;
