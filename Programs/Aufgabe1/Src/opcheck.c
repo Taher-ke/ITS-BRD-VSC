@@ -12,14 +12,14 @@
 
  #include <token.h>
  #include <limits.h>
-
+//ueberprueft, ob Overflow bei Addition auftritt.
 int check_plus(int a, int b) {
     if ((b > 0 && a > INT_MAX - b) || (b < 0 && a < INT_MIN - b)) {
         return -5;
     }
     return 0;
 }
-
+//ueberprueft, ob Overflow bei Addition auftritt.
 int check_minus(int a, int b) {
     // b - a
     if ((a < 0 && b > INT_MAX + a) || (a > 0 && b < INT_MIN + a)) {
