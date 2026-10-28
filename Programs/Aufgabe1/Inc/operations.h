@@ -1,9 +1,9 @@
 /**
-  * @file operations.h
-  * @author Sönke Wulf , Taher Keshavarzian
-  * @date Mar 2016
-  * @brief Header file of operations module. 
-  */
+ * @file operations.h
+ * @author Sönke Wulf , Taher Keshavarzian
+ * @date Mar 2016
+ * @brief Header file of operations module.
+ */
 
 #include "stack.h"
 

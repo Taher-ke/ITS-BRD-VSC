@@ -12,8 +12,8 @@
 #define STACK_SIZE 11
 
 typedef struct {
-	int arr[STACK_SIZE];
-	int pos;
+    int arr[STACK_SIZE];
+    int pos;
 } Stack;
 
 void init(Stack *stack);

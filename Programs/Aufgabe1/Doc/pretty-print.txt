@@ -1,0 +1,1 @@
+python ./bin/format_all.py "C:/Users/soenk/Documents/02_Studium/ITS_Code/S3_GS/ITS-BRD-VSC/Programs/Aufgabe1/Aufgabe1"
