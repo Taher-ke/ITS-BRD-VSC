@@ -15,49 +15,50 @@
 #include "terminal.h"
 #include <stdlib.h>
 
-static Terminal stdoutTerm = INVALID_TERM;
-static Terminal echoTerm = INVALID_TERM;
+static Terminal stdout_term = INVALID_TERM;
+static Terminal echo_term = INVALID_TERM;
 
-void clearStdout(void) { clearTerm(&stdoutTerm); }
+void clear_stdout(void) { clearTerm(&stdout_term); }
 
-void clearEchoTerm(void) { clearTerm(&echoTerm); }
+void clear_echo_term(void) { clearTerm(&echo_term); }
 
-void printStdout(char *m) { printTerm(m, &stdoutTerm); }
+void print_stdout(char *msg) { printTerm(msg, &stdout_term); }
 
-void initDisplay(void) {
-	GUI_init(DEFAULT_BRIGHTNESS); // Initialisierung des LCD Boards mit Touch
-	TP_Init(false);					// Initialisierung des LCD Boards mit Touch
-	Terminal term = makeKeyPad();
-	// Replace terminal by two terminals. One for standard output and
-	// one to echo entered digits.
-	Coordinate c = term.bottomRight;
-	c.y = c.y - term.font->Height - 1;
-	stdoutTerm = genTerm(term.topLeft, c, term.bgColor, term.fgColor, term.font);
-	c = term.topLeft;
-	c.y = term.bottomRight.y - term.font->Height;
-	echoTerm = genTerm(c, term.bottomRight, BLUE, YELLOW, term.font);
-	clearEchoTerm();
-	clearStdout();
+void init_display(void) {
+   GUI_init(DEFAULT_BRIGHTNESS); // Initialisierung des LCD Boards mit Touch
+   TP_Init(false);               // Initialisierung des LCD Boards mit Touch
+   Terminal term = makeKeyPad();
+   // Replace terminal by two terminals. One for standard output and
+   // one to echo entered digits.
+   Coordinate cor = term.bottomRight;
+   cor.y = cor.y - term.font->Height - 1;
+   stdout_term =
+       genTerm(term.topLeft, cor, term.bgColor, term.fgColor, term.font);
+   cor = term.topLeft;
+   cor.y = term.bottomRight.y - term.font->Height;
+   echo_term = genTerm(cor, term.bottomRight, BLUE, YELLOW, term.font);
+   clear_echo_term();
+   clear_stdout();
 }
 
-void printToEchoLine(char c) {
-	char buf[2] = {'\0', '\0'};
-	buf[0] = c;
-	printTerm(buf, &echoTerm);
+void print_to_echo_line(char chr) {
+   char buf[2] = {'\0', '\0'};
+   buf[0] = chr;
+   printTerm(buf, &echo_term);
 }
 
-void setErrMode(void) {
-	clearTerm(&stdoutTerm);
-	setTextColorTerm(RED, &stdoutTerm);
+void set_err_mode(void) {
+   clearTerm(&stdout_term);
+   setTextColorTerm(RED, &stdout_term);
 }
 
-void setNormalMode(void) {
-	clearTerm(&stdoutTerm);
-	setTextColorTerm(BLACK, &stdoutTerm);
+void set_normal_mode(void) {
+   clearTerm(&stdout_term);
+   setTextColorTerm(BLACK, &stdout_term);
 }
 
-bool isBottomLine(void) {
-	return getCurRow(&stdoutTerm) + 1 == getNoOfRows(&stdoutTerm);
+bool is_bottom_line(void) {
+   return getCurRow(&stdout_term) + 1 == getNoOfRows(&stdout_term);
 }
 
 // EOF

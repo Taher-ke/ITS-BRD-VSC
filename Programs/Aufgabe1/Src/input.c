@@ -7,6 +7,7 @@
  */
 
 #include <operations.h>
+<<<<<<< HEAD
 #include <scanner.h>
 #include <token.h>
 /**
@@ -21,9 +22,15 @@
  *         -5 bei einer Bereichsüberschreitung,
  *         -1 bei einem unbekannten Token.
  */
+=======
+#include <token.h>
+#include <scanner.h>
+#include "output.h"
+>>>>>>> sw-refactoring
 
 int process_token(Stack *stack, T_token *token) {
 	int status = -1;
+<<<<<<< HEAD
 	switch (token->tok) {
 	case NUMBER:
 		status = number(stack, token->val);
@@ -61,6 +68,45 @@ int process_token(Stack *stack, T_token *token) {
 		break;
 	default:
 		status = -1;
+=======
+	switch(token->tok) {
+		case NUMBER:
+			status = number(stack, token->val);
+			break;
+		case PLUS:
+			status = plus(stack);
+			break;
+		case MINUS:
+			status = minus(stack);
+			break;
+		case MULT:
+			status = mult(stack);
+			break;
+		case DIV:
+			status = div(stack);
+			break;
+		case PRT:
+			status = prt(stack);
+			break;
+		case PRT_ALL:
+			status = prt_3(stack);
+			break;
+		case CLEAR:
+			status = clear(stack);
+			break;
+		case DOUBLE:
+			status = dup(stack);
+			//status = test(stack);
+			break;
+		case SWAP:
+			status = swap(stack);
+			break;
+		case OVERFLOW:
+			status= E_OUT_OF_RANGE;
+			break;
+		default:
+			status = E_DEFAULT_ERROR;
+>>>>>>> sw-refactoring
 	}
 	return status;
 }
@@ -72,10 +118,17 @@ int process_token(Stack *stack, T_token *token) {
  */
 int listen_rpn(Stack *stack) {
 	int status = 0;
+<<<<<<< HEAD
 	// Token lesen und verarbeiten, solange kein Fehler vorliegt.
 	while (status >= 0) {
 		T_token token = nextToken();
 		status = process_token(stack, &token);
+=======
+	// Main Loop
+	while(status >= 0) {
+		T_token token = next_token();
+		status = process_token(stack,&token);
+>>>>>>> sw-refactoring
 	}
 	return status;
 }
@@ -88,8 +141,13 @@ int listen_rpn(Stack *stack) {
  * @param status Zeiger auf den zurückzusetzenden Fehlerstatus.
  */
 void listen_restart(int *status) {
+<<<<<<< HEAD
 	while (1) {
 		T_token token = nextToken();
+=======
+	while(1) {
+		T_token token = next_token();
+>>>>>>> sw-refactoring
 		if (token.tok == 'C') {
 			*status = 0;
 			return;

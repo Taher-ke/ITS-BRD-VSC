@@ -8,7 +8,6 @@
 /* Includes ------------------------------------------------------------------*/
 
 #include "init.h"
-#include "stm32f4xx_hal.h"
 #include <stdbool.h>
 
 #include "display.h"
@@ -25,7 +24,7 @@ int main(void) {
 	// Initialisierung
 	initITSboard();
 	int status = 0; // Für Fehler-Codes
-	initDisplay();
+	init_display();	
 	Stack stack;
 
 	/** Loop:
