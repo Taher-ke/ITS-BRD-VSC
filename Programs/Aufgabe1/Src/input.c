@@ -6,9 +6,10 @@
  * @brief This module implements functions that listen for input.
  */
 
- #include <operations.h>
- #include <token.h>
+#include <operations.h>
+#include <token.h>
 #include <scanner.h>
+#include "output.h"
 
  int process_token(Stack *stack, T_token *token) {
 	int status = -1;
@@ -45,10 +46,10 @@
 			status = swap(stack);
 			break;
 		case OVERFLOW:
-			status= -5;
+			status= E_OUT_OF_RANGE;
 			break;
 		default:
-			status = -1;
+			status = E_DEFAULT_ERROR;
 	}
 	return status;
 }
@@ -57,7 +58,7 @@ int listen_rpn(Stack *stack) {
 	int status = 0;
 	// Main Loop
 	while(status >= 0) {
-		T_token token = nextToken();
+		T_token token = next_token();
 		status = process_token(stack,&token);
 	}
 	return status;
@@ -65,7 +66,7 @@ int listen_rpn(Stack *stack) {
 
 void listen_restart(int *status) {
 	while(1) {
-		T_token token = nextToken();
+		T_token token = next_token();
 		if (token.tok == 'C') {
 			*status = 0;
             return;

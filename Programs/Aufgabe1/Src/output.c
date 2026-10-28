@@ -7,28 +7,30 @@
  */
 
 #include <display.h>
-#include "errno.h"
-#include "string.h"
+#include "output.h"
+
+#define LEN_STR_ARRAY 10
+#define DECIMAL_BASE 10
 
 // Fehlermeldung auf dem Terminal ausgeben
-void print_error(int *status) {
-    clearStdout();
+void print_error(int const *status) {
+    clear_stdout();
     switch(*status) {
-        case -2:
-            printStdout("Stack Overflow (2)\n");
+        case E_STACK_OVERFLOW:
+            print_stdout("Stack Overflow\n");
             break;
-        case -3:
-            printStdout("Stack Underflow (3)\n");
+        case E_STACK_UNDERFLOW:
+            print_stdout("Stack Underflow\n");
             break;
-        case -4:
-            printStdout("Division durch Null (4)\n");
+        case E_ZERO_DIVISION:
+            print_stdout("Division durch Null\n");
             break;
-        case -5:
-            printStdout("Bereichsueberschreitung (5)\n");
+        case E_OUT_OF_RANGE:
+            print_stdout("Bereichsueberschreitung\n");
             break;
         default:
             //printStdout(strerror(errno));
-            printStdout("Unbekannter Fehler\n");
+            print_stdout("Unbekannter Fehler\n");
     }
 }
 
@@ -37,7 +39,7 @@ void print_int(int input)
 {
     // Maximale Länge des Integers:
     // (10 Ziffern, 1 minus, 1 \n,  1 Nullterminator) = 13
-    char arr[13];
+    char arr[LEN_STR_ARRAY + 3];
     int is_negative = 0;
 
     // Negative Zahlen abfangen
@@ -54,9 +56,9 @@ void print_int(int input)
     // Anzahl Ziffern herausfinden
     int digits = is_negative;
     unsigned int p_input2 = p_input;
-    while(p_input2 >= 10)
+    while(p_input2 >= LEN_STR_ARRAY)
     {
-        p_input2 = p_input2 / 10;
+        p_input2 = p_input2 / LEN_STR_ARRAY;
         digits ++;
     }
 
@@ -67,13 +69,13 @@ void print_int(int input)
     // In Ziffern umwandeln
     while(digits >= is_negative)
     {
-        arr[digits] = (char) (p_input % 10 + '0');
-        p_input = p_input / 10;
+        arr[digits] = (char) ((p_input % DECIMAL_BASE) + '0');
+        p_input = p_input / DECIMAL_BASE;
         digits --;
     }
-    printStdout(arr);
+    print_stdout(arr);
 }
 
 void clear_output(void) {
-    clearStdout();
+    clear_stdout();
 }

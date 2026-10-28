@@ -6,6 +6,6 @@
  * @brief
  */
 
-int check_overflow(int *val1, int *val2, char type);
+int check_overflow(int const *val1, int const *val2, char type);
 
 // EOF
