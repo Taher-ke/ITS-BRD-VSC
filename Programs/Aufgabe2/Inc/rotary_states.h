@@ -4,7 +4,7 @@
  * @date    09.11.2026
  * @brief   Gemeinsame Definitionen fuer alle Drehgeber-Module.
  *
- *          Enthaelt die Kodierung der vier Phasen (Rohwert aus GPIOF->IDR),
+ *          Enthaelt die Kodierung der vier Phasen (Wert aus GPIOF->IDR),
  *          die Ergebnisse eines Phasenwechsels (STATE_*) und die einheitlichen
  *          Fehlercodes. Alle Module binden nur diese Datei ein und muessen
  *          sich deshalb nicht gegenseitig kennen.
@@ -39,7 +39,7 @@
 #define STATE_ERROR 4     // Phase uebersprungen (a<->c oder b<->d)
 
 // Einheitliche Fehlercodes (Konzept: 0 = OK, negativ = Fehler)
-#define EOK 0                  // kein Fehler */
+#define EOK 0                  // kein Fehler
 #define ERR_PHASE_SKIPPED (-1) // ungueltiger Phasenuebergang erkannt
 #define ERR_INVALID_PARAM (-2) // ungueltiger Parameter (z. B. Phase > 3)
 

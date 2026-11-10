@@ -9,15 +9,15 @@
 #include "rotary_calculator.h"
 #include <stddef.h>
 
-/* 300 Schlitze * 4 Phasen = 1200 Phasenwechsel pro Umdrehung -> 0,3 Grad */
+// 300 Schlitze * 4 Phasen = 1200 Phasenwechsel pro Umdrehung -> 0,3 Grad
 #define PHASE_CHANGES_PER_REV 1200.0
 #define DEGREE_PER_STEP (360.0 / PHASE_CHANGES_PER_REV)
 
 /* Timer der ITS_BRD_LIB: 90 Ticks pro Mikrosekunde */
 #define TICKS_PER_SECOND 90000000.0
 #define TICKS_PER_MS 90000U
-#define WINDOW_TICKS (300U * TICKS_PER_MS)   /**< 300 ms Zeitfenster */
-#define TIMEOUT_TICKS (3000U * TICKS_PER_MS) /**< 3 s ohne Phasenwechsel */
+#define WINDOW_TICKS (300U * TICKS_PER_MS)   // 300 ms Zeitfenster
+#define TIMEOUT_TICKS (3000U * TICKS_PER_MS) // 3 s ohne Phasenwechsel
 
 /**
  * @brief Phasenzaehler zusammen mit dem Zeitstempel des letzten
@@ -28,17 +28,17 @@ typedef struct {
   uint32_t timestamp;
 } Counter_t;
 
-/* ---------------- Zustand des Moduls (Information Hiding) ---------------- */
-static uint32_t prev_phase = PHASE_A; /**< Phase des letzten Durchlaufs */
-static Counter_t counter = {0, 0U};  /**< aktueller Phasenzaehler */
-static Counter_t window = {0, 0U};   /**< Zaehlerstand am Fensteranfang */
-static bool changed_now = false;      /**< Phasenwechsel in diesem Durchlauf */
+// Zustand des Moduls
+static uint32_t prev_phase = PHASE_A; // Phase des letzten Durchlaufs
+static Counter_t counter = {0, 0U};  // aktueller Phasenzaehler
+static Counter_t window = {0, 0U};   // Zaehlerstand am Fensteranfang
+static bool changed_now = false;      // Phasenwechsel in diesem Durchlauf
 
 /*
  * Uebergangsmatrix: Zeile = letzte Phase, Spalte = aktuelle Phase.
- * Die Indizes sind die Rohwerte der Phasen. Durch die Designated
+ * Die Indizes sind die Werte der Phasen. Durch die Designated
  * Initializers ([PHASE_x] = ...) passt jede Zeile garantiert zur Phase,
- * obwohl die Rohwerte nicht in der Reihenfolge a, b, c, d liegen.
+ * obwohl die Werte nicht in der Reihenfolge a, b, c, d liegen.
  */
 static const int TRANSITION[NUM_PHASES][NUM_PHASES] = {
     [PHASE_A] = {[PHASE_A] = STATE_NOCHANGE,
@@ -61,7 +61,7 @@ static const int TRANSITION[NUM_PHASES][NUM_PHASES] = {
 
 int rotary_determine_state(uint32_t last_phase, uint32_t curr_phase) {
   if ((last_phase >= NUM_PHASES) || (curr_phase >= NUM_PHASES)) {
-    return STATE_ERROR; /* Schutz vor Zugriff ausserhalb der Matrix */
+    return STATE_ERROR; // Schutz vor Zugriff ausserhalb der Matrix
   }
   return TRANSITION[last_phase][curr_phase];
 }
@@ -91,7 +91,7 @@ int rotary_update(Phase_t phase) {
     changed_now = true;
     break;
   default:
-    /* STATE_NOCHANGE und STATE_ERROR veraendern den Zaehler nicht */
+    // STATE_NOCHANGE und STATE_ERROR veraendern den Zaehler nicht
     break;
   }
   return state;
@@ -128,7 +128,7 @@ bool rotary_get_speed(uint32_t now, double *speed) {
       (double)(end.timestamp - window.timestamp) / TICKS_PER_SECOND;
   *speed = (double)(end.value - window.value) * DEGREE_PER_STEP / seconds;
 
-  window = end; /* neues Fenster beginnt am Ende des alten */
+  window = end; // neues Fenster beginnt am Ende des alten
   return true;
 }
 // EOF

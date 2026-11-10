@@ -23,10 +23,10 @@
 #define RESET(pin) (0x01U << ((pin) + BSRR_RESET_OFFSET))
 
 void set_led_counter(int32_t phase_counter) {
-  /* Zweierkomplement: -1 -> 0xFF, -2 -> 0xFE, ... */
+  // Zweierkomplement: -1 -> 0xFF, -2 -> 0xFE, ...
   uint32_t on = (uint32_t)phase_counter & COUNTER_MASK;
   uint32_t off = (~on) & COUNTER_MASK;
-  /* Ein Schreibzugriff setzt alle 8 LEDs, PD8-PD15 bleiben unberuehrt. */
+  // Ein Schreibzugriff setzt alle 8 LEDs, PD8-PD15 bleiben unberuehrt
   GPIOD->BSRR = on | (off << BSRR_RESET_OFFSET);
 }
 
@@ -39,7 +39,7 @@ void set_led_direction(int state) {
     GPIOE->BSRR = SET(LED_BWD_PIN) | RESET(LED_FWD_PIN);
     break;
   default:
-    /* keine Aenderung: letzte Richtung bleibt sichtbar */
+    // keine Aenderung: letzte Richtung bleibt sichtbar
     break;
   }
 }

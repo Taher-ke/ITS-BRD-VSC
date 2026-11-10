@@ -101,10 +101,10 @@ Maximale verarbeitbare Winkelgeschwindigkeit: ω_max = 0,3° / T_Loop,max = ___ 
 1. DDC: Beim Reset wird kein zweites Mal eingelesen, sondern die Phase des aktuellen Durchlaufs verwendet.
 2. Reset vollständig (Zähler, Winkel, Geschwindigkeit, Zeitfenster, Richtungs-LEDs) und jederzeit mit S6 möglich.
 3. Geschwindigkeit nach Aufgabenstellung: 300-ms-Fenster, Timeout 3 s, Zeitstempel am Phasenwechsel.
-4. Phasenzähler, Winkel und Geschwindigkeit ins Modul `rotary_calculator` verschoben (Zustand in `static`-Variablen). Die zuvor nur deklarierten Funktionen `rotary_getAngle()` und `rotary_getSpeed()` sind jetzt implementiert.
+4. Phasenzähler, Winkel und Geschwindigkeit ins Modul `rotary_calculator` verschoben (Zustand in `static`-Variablen). Die zuvor nur deklarierten Funktionen `rotary_get_angle()` und `rotary_get_speed()` sind jetzt implementiert.
 5. `Phase_t` (Phase + Zeitstempel) und `Counter_t` (Zähler + Zeitstempel) als struct.
 6. Phasenkonstanten korrigiert (vorher Hex-Werte 0x10/0x11 und vertauschte Kommentare). Die FSM-Matrix nutzt Designated Initializers mit diesen Konstanten, mit Bereichsprüfung der Parameter.
 7. Im Fehlerfall wird sofort abgebrochen. Das Display beendet den laufenden Zyklus mit eingefrorenen Werten.
 8. Display: genau ein Zeichen pro Durchlauf, Puffer `static`.
-9. Einheitliche Fehlerbehandlung (`handleError()`, Fehlercodes).
+9. Einheitliche Fehlerbehandlung (`handle_error()`, Fehlercodes).
 10. Aufräumen: ungenutzte Makros und Deklarationen entfernt, `main.h` (Inhalt „empty file“) entfernt, Konstanten in `rotary_states.h`, `1U <<` statt `1 <<`, `default` in `switch`, mit clang-format formatiert.

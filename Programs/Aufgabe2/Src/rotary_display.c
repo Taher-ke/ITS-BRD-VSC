@@ -10,7 +10,7 @@
 #include "lcd.h"
 #include <stdio.h>
 
-/* Feste Texte, nur einmal ausgegeben. Die Werte stehen ab Spalte 19. */
+// Feste Texte, nur einmal ausgegeben. Die Werte stehen ab Spalte 19
 #define ANGLE_TXT "Winkel          :  0.0          Grad"
 #define SPEED_TXT "Geschwindigkeit :  0.0          Grad/s"
 
@@ -20,16 +20,16 @@
 #define YPOS_ANGLE_TXT (YPOS_MIDDLE - 2)
 #define YPOS_SPEED_TXT (YPOS_MIDDLE + 2)
 
-#define VAL_WIDTH 9              /**< Zeichen pro Wert ("%9.1f") */
-#define BUF_SIZE (VAL_WIDTH + 1) /**< + Nullterminator */
-#define NUM_POS (2 * VAL_WIDTH)  /**< Positionen pro Ausgabezyklus */
+#define VAL_WIDTH 9              // Zeichen pro Wert ("%9.1f")
+#define BUF_SIZE (VAL_WIDTH + 1) // + Nullterminator
+#define NUM_POS (2 * VAL_WIDTH)  // Positionen pro Ausgabezyklus
 
-/* Information Hiding: nur in dieser Datei sichtbar */
+// Nur in dieser Datei sichtbar
 static char buf_angle[BUF_SIZE];
-static char buf_angle_shown[BUF_SIZE]; /**< aktuell auf dem LCD sichtbar */
+static char buf_angle_shown[BUF_SIZE]; // aktuell auf dem LCD sichtbar
 static char buf_speed[BUF_SIZE];
 static char buf_speed_shown[BUF_SIZE];
-static int pos = 0; /**< 0..8 Winkel, 9..17 Geschwindigkeit */
+static int pos = 0; // 0..8 Winkel, 9..17 Geschwindigkeit
 
 void init_display(void) {
   GUI_init(DEFAULT_BRIGHTNESS);
@@ -53,7 +53,7 @@ static void print_if_changed(char *buf, char *shown, int idx, int ypos) {
 
 void update_display(double angle, double angle_per_sec) {
   if (pos == 0) {
-    /* Snapshot: alle Zeichen eines Zyklus stammen von denselben Werten. */
+    // Snapshot: alle Zeichen eines Zyklus stammen von denselben Werten
     (void)snprintf(buf_angle, BUF_SIZE, "%9.1f", angle);
     (void)snprintf(buf_speed, BUF_SIZE, "%9.1f", angle_per_sec);
   }
