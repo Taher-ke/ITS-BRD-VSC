@@ -2,8 +2,11 @@
     "targetSet": {
         "Programs/Aufgabe1/Aufgabe1": {
             "activeTargetType": "ITSboard"
+        },
+        "Programs/Aufgabe2/Aufgabe2": {
+            "activeTargetType": "ITSboard"
         }
     },
-    "activeSolution": "../Programs/Aufgabe1/Aufgabe1.csolution.yml",
+    "activeSolution": "../Programs/Aufgabe2/Aufgabe2.csolution.yml",
     "activeTarget": "ITSboard"
 }
