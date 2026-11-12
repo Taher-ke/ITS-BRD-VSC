@@ -15,27 +15,30 @@
 #include <token.h>
 
 int check_plus(int op1, int op2) {
+    // Prüfe auf Bereichsüberschreitung (nach oben und nach unten)
     if ((op2 > 0 && op1 > INT_MAX - op2) || (op2 < 0 && op1 < INT_MIN - op2)) {
         return E_OUT_OF_RANGE;
     }
-    return 0;
+    return NO_ERROR;
 }
 
 int check_minus(int op1, int op2) {
-    // b - a
+    // Erinnerung Reihenfolge: op2 - op1
+    // Prüfe auf Bereichsüberschreitung (nach oben und nach unten) wie bei check_plus()
     if ((op1 < 0 && op2 > INT_MAX + op1) || (op1 > 0 && op2 < INT_MIN + op1)) {
         return E_OUT_OF_RANGE;
     }
-    return 0;
+    return NO_ERROR;
 }
 
 int check_mult(int op1, int op2) {
-    // Ergebnis null
+    // Aufteilung in drei Prüffälle: Ergebnis ist null, positiv oder negativ
+    // 1. Ergebnis null
     if (op1 == 0 || op2 == 0) {
-        return 0;
+        return NO_ERROR;
     }
 
-    // positives Ergebnis
+    // 2. positives Ergebnis
     if ((op1 > 0 && op2 > 0) || (op1 < 0 && op2 < 0)) {
         // Betrag berechnen
         unsigned int u_op1;
@@ -56,7 +59,7 @@ int check_mult(int op1, int op2) {
         }
     }
 
-    // negatives Ergebnis
+    // 3. negatives Ergebnis
     else {
         if (op1 > 0) { // a positiv, b negativ
             if (op2 < INT_MIN / op1) {
@@ -68,24 +71,24 @@ int check_mult(int op1, int op2) {
             }
         }
     }
-    return 0;
+    return NO_ERROR;
 }
 
 int check_div(int op1, int op2) {
-    // div mit 0
+    // Prüfung auf Division mit 0
     if (op1 == 0) {
         return E_ZERO_DIVISION;
     }
 
-    // min_int / -1 Bereichsüberschreitung
+    // MIN_INT / -1 (Prüfung auf Bereichsüberschreitung)
     if (op2 == INT_MIN && op1 == -1) {
         return E_OUT_OF_RANGE;
     }
 
-    return 0;
+    return NO_ERROR;
 }
 
-// Aufteilung in vier Funktionen
+// Verteilung auf vier Prüf-Funktionen (je nach Operator)
 int check_overflow(int const *op1, int const *op2, char type) {
     int status;
     switch (type) {

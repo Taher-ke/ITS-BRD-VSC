@@ -18,7 +18,7 @@
 #include <token.h>
 
 int process_token(Stack *stack, T_token *token) {
-    int status = -1;
+    int status = E_DEFAULT_ERROR;
 
     switch (token->tok) {
     case NUMBER:
@@ -67,10 +67,10 @@ int process_token(Stack *stack, T_token *token) {
  * @return Negativer Fehlercode, der die Verarbeitung beendet hat.
  */
 int listen_rpn(Stack *stack) {
-    int status = 0;
+    int status = NO_ERROR;
     // Token lesen und verarbeiten, solange kein Fehler vorliegt.
     // Main Loop
-    while (status >= 0) {
+    while (status >= NO_ERROR) {
         T_token token = next_token();
         status = process_token(stack, &token);
     }
@@ -88,7 +88,7 @@ void listen_restart(int *status) {
     while (1) {
         T_token token = next_token();
         if (token.tok == 'C') {
-            *status = 0;
+            *status = NO_ERROR;
             return;
         }
     }

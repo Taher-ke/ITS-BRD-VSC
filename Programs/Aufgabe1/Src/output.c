@@ -9,7 +9,8 @@
 #include "output.h"
 #include <display.h>
 
-#define LEN_STR_ARRAY 10
+#define LEN_STR_ARRAY 10 // Maximale Länge des Zahlen Output-Buffers
+#define LEN_SPECIAL_CHARS 3 // Platz für -, \n und Nullterminator im Output-Buffer
 #define DECIMAL_BASE 10
 
 // Fehlermeldung auf dem Terminal ausgeben
@@ -38,7 +39,7 @@ void print_error(int const *status) {
 void print_int(int input) {
     // Maximale Länge des Integers:
     // (10 Ziffern, 1 minus, 1 \n,  1 Nullterminator) = 13
-    char arr[LEN_STR_ARRAY + 3];
+    char arr[LEN_STR_ARRAY + LEN_SPECIAL_CHARS];
     int is_negative = 0;
 
     // Negative Zahlen abfangen

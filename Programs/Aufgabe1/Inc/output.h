@@ -5,6 +5,7 @@
  *
  * @brief
  */
+#define NO_ERROR 0
 #define E_DEFAULT_ERROR -1
 #define E_STACK_OVERFLOW -2
 #define E_STACK_UNDERFLOW -3

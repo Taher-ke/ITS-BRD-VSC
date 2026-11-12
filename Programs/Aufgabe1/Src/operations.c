@@ -52,7 +52,7 @@ int mult(Stack *stack) {
         (status = push(stack, popped1 * popped2)) < 0) {
         return status;
     }
-    return 0;
+    return NO_ERROR;
 }
 // poppt zwei oberste Elemente, ueberpruft Overflow und pusht die Division auf
 // den Stack.
@@ -66,7 +66,7 @@ int div(Stack *stack) {
         (status = push(stack, popped2 / popped1)) < 0) {
         return status;
     }
-    return 0;
+    return NO_ERROR;
 }
 
 // obersten Wert auf dem Stack ausgeben
@@ -77,7 +77,7 @@ int prt(Stack *stack) {
         return status;
     }
     print_int(peeked);
-    return 0;
+    return NO_ERROR;
 }
 
 // die drei obersten Werte auf dem Stack ausgeben
@@ -103,14 +103,14 @@ int prt_3(Stack *stack) {
             return status;
         }
     }
-    return 0;
+    return NO_ERROR;
 }
 
 // Stack und Ausgabe auf dem Terminal leeren
 int clear(Stack *stack) {
     init(stack);
     clear_output();
-    return 0;
+    return NO_ERROR;
 }
 
 // oberstes Element auf dem Stack duplizieren
@@ -121,7 +121,7 @@ int dup(Stack *stack) {
         (status = push(stack, peeked)) < 0) {
         return status;
     }
-    return 0;
+    return NO_ERROR;
 }
 
 // Die beiden obersten Elemente auf dem Stack tauschen
@@ -133,7 +133,7 @@ int swap(Stack *stack) {
         (status = push(stack, val1)) < 0 || (status = push(stack, val2)) < 0) {
         return status;
     }
-    return 0;
+    return NO_ERROR;
 }
 
 // Zahl auf dem Stack ablegen
@@ -142,7 +142,7 @@ int number(Stack *stack, int number) {
     if ((status = push(stack, number)) < 0) {
         return status;
     }
-    return 0;
+    return NO_ERROR;
 }
 
 int test(Stack *stack) {
@@ -151,7 +151,7 @@ int test(Stack *stack) {
         (status = div(stack)) < 0) {
         return status;
     }
-    return 0;
+    return NO_ERROR;
 }
 
 /* // alle Werte auf dem Stack ausgeben
@@ -178,7 +178,7 @@ int prtAll(Stack *stack) {
                 return status;
           }
      }
-     return 0;
+     return NO_ERROR;
 } */
 
 // EOF

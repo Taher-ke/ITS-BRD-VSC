@@ -23,7 +23,7 @@
 int main(void) {
     // Initialisierung
     initITSboard();
-    int status = 0; // Für Fehler-Codes
+    int status = NO_ERROR; // Für Fehler-Codes
     init_display();
     Stack stack;
 
@@ -38,7 +38,7 @@ int main(void) {
         print_error(&status);
         listen_restart(&status);
     }
-    return -1;
+    return E_DEFAULT_ERROR;
 }
 
 // EOF
