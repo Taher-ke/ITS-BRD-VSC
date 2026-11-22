@@ -5,8 +5,11 @@
         },
         "Programs/Aufgabe2/Aufgabe2": {
             "activeTargetType": "ITSboard"
+        },
+        "Programs/Aufgabe3/Aufgabe3": {
+            "activeTargetType": "ITSboard"
         }
     },
-    "activeSolution": "../Programs/Aufgabe1/Aufgabe1.csolution.yml",
+    "activeSolution": "../Programs/Aufgabe3/Aufgabe3.csolution.yml",
     "activeTarget": "ITSboard"
 }
