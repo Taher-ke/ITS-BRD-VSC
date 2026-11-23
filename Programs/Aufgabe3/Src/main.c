@@ -31,6 +31,8 @@
 #include "usb_clock_config.h"
 #include <timer.h>
 
+#include "testing.h"
+
 /**
  * @brief  Main program
  * @param  None
@@ -59,12 +61,15 @@ int main(void) {
          Display ausgeben; danach wartet input_file_header() selbst ohne
          Textausgabe auf S5 (PF5) und loescht dann das Display -- ein
          Tastendruck (egal wie lange) genuegt fuer den naechsten Header. */
-      if (EOK != input_file_header()) {
+      if (EOK != print_picture()) {
+      //if (EOK != input_file_header()) {
          /* Fehler wurde bereits im Error-Handler auf dem LCD gemeldet und
             die laufende Operation abgebrochen; Meldung stehen lassen, erst
             S5 (PF5) fordert die naechste Datei an. */
          wait_for_s_i(BUTTON_S5);
       }
+
+
    }
 }
 // EOF

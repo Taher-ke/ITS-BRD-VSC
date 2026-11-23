@@ -207,6 +207,7 @@ project:
         - file: Src/usbd_cdc_if.c
         - file: Src/usbd_conf.c
         - file: Src/usbd_desc.c
+        - file: Src/testing.c
 
   components:
     - component: ARM::CMSIS:CORE

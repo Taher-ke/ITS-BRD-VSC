@@ -15,6 +15,7 @@
 #define FORMAT_ERR              9
 #define LINE_BUF_ERR           10
 #define IMG_SIZE_ERR           11
+#define NOT_IMPLEMENTED_ERR    12
 
 // Do not call this function directly. Use the wrapper macros CHECK / CHECK_FATAL.
 extern int my_err_handler(bool cnd, char *file, int line, int err_no, bool loop_for_ever);
